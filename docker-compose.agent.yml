@@ -25,8 +25,10 @@ services:
 #    mode: global
   env_file:
    - .env
-  privileged: true
-  pid: "host"
+#   privileged: true
+#   pid: "host"
+  cap_drop:
+   - ALL
   networks:
    zbx_net_backend:
     aliases:
