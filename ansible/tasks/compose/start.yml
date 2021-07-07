@@ -1,0 +1,13 @@
+- name: Start nodes
+  hosts: all
+  vars_files:
+  - "../../vars/nodes.yml"
+
+  tasks:
+  - name: Start services
+    become: yes
+    command:
+      cmd: >
+        docker-compose
+        -f {{ workdir }}/{{ docker_compose_file }}
+        start

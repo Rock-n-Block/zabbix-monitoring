@@ -1,0 +1,62 @@
+  
+- name: Tear down existing services
+  become: yes
+  command:
+    cmd: >
+      docker-compose
+      -f {{ worker_home_path}}/{{ docker_compose_file }}
+      down
+
+#- name: Prune unused Docker files (images, containers, networks)
+#  command:
+#    cmd: >
+#      docker system prune -a -f
+
+- name: Create and start services
+  become: yes
+  command:
+    cmd: >
+      docker-compose
+      -f {{ worker_home_path }}/{{ docker_compose_file }}
+      up --build -d
+
+- name: Make migrations (relayer)
+  become: yes
+  command: 
+    cmd: > 
+      docker-compose 
+      -f "{{ worker_home_path }}/{{ docker_compose_file }}"
+      exec {{ python_app }} python manage.py makemigrations relayer
+
+- name: Make migrations (validator)
+  become: yes
+  command: 
+    cmd: > 
+      docker-compose 
+      -f {{ worker_home_path}}/{{ docker_compose_file }}
+      exec {{ python_app }} python manage.py makemigrations validator
+
+- name: Make migrations (watcher)
+  become: yes
+  command: 
+    cmd: > 
+      docker-compose 
+      -f {{ worker_home_path}}/{{ docker_compose_file }}
+      exec {{ python_app }} python manage.py makemigrations watcher
+
+- name: Migrate DB
+  become: yes
+  command: 
+    cmd: > 
+      docker-compose 
+      -f {{ worker_home_path}}/{{ docker_compose_file }}
+      exec {{ python_app }} python manage.py migrate
+
+- name: Create and start services
+  become: yes
+  command:
+    cmd: >
+      docker-compose
+      -f {{ worker_home_path}}/{{ docker_compose_file }}
+      up --build -d
+      

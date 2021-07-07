@@ -1,0 +1,21 @@
+- name: Build and deploy nodes
+  hosts: all
+  vars_files:
+  - "../../vars/nodes.yml"
+
+  tasks:
+  - name: Tear down existing services
+    become: yes
+    command:
+      cmd: >
+        docker-compose
+        -f {{ workdir}}/{{ docker_compose_file }}
+        down
+
+
+  - name: Delete project directory
+    file:
+      path: "{{ workdir }}"
+      state: absent
+      
+      

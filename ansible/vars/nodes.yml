@@ -1,0 +1,2 @@
+agent_workdir: /srv/zabbix_agent
+docker_compose_file: docker-compose.yml

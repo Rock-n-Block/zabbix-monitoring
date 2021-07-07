@@ -1,0 +1,16 @@
+all:
+  vars:
+    ansible_user:
+      root
+
+
+zabbix_server:
+  ansible_host: XXX.XXX.XXX.XXX
+
+nodes:
+  hosts:
+    agent1:
+      ansible_host: XXX.XXX.XXX.XXX
+    agent2:
+      ansible_host: XXX.XXX.XXX.XXX
+

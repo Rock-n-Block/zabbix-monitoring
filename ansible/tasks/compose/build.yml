@@ -1,0 +1,37 @@
+
+- name: Build and deploy nodes
+  hosts: all
+  vars_files:
+  - "../../vars/nodes.yml"
+
+  tasks:
+  - name: Tear down existing services
+    command:
+      cmd: >
+        docker-compose
+        -f {{ workdir }}/{{ docker_compose_file }}
+        down
+
+  - name: Prune unused Docker files (images, containers, networks)
+    command:
+      cmd: >
+        docker system prune -a -f
+
+  - name: Create data directory
+    file:
+      path: "{{ workdir }}/data"
+      state: directory
+    
+  - name: Copy configuration file
+    copy:
+      src: "{{ workdir }}/ducatuscoin.conf"
+      dest: "{{ workdir }}/data/ducatuscoin.conf"
+      remote_src: True
+
+  - name: Create and start services
+    become: yes
+    command:
+      cmd: >
+        docker-compose
+        -f {{ workdir }}/{{ docker_compose_file }}
+        up -d

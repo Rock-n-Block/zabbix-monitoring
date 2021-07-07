@@ -1,0 +1,13 @@
+- name: Stop nodes
+  hosts: all
+  vars_files:
+  - "../../vars/nodes.yml"
+
+  tasks:
+  - name: Stop services
+    become: yes
+    command:
+      cmd: >
+        docker-compose
+        -f {{ workdir }}/{{ docker_compose_file }}
+        stop

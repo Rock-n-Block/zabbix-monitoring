@@ -1,0 +1,4 @@
+.env
+zbx_env
+.ZBX*
+ansible/hosts.yml
