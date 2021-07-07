@@ -21,7 +21,7 @@ setup_global:
 	$(ansible_cfg) ansible-playbook -i=$(hosts_path) -l $(service) ansible/tasks/global-sync.yml $(verbosity)
 
 setup_server:
-	$(ansible_cfg) ansible-playbook -i=$(hosts_path) -l zabbix-server ansible/tasks/configure-server.yml $(verbosity)
+	$(ansible_cfg) ansible-playbook -i=$(hosts_path) -l zabbix_server ansible/tasks/configure-server.yml $(verbosity)
 
 setup_agent:
 	$(ansible_cfg) ansible-playbook -i=$(hosts_path) -l $(service) ansible/tasks/configure-agents.yml $(verbosity)
