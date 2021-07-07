@@ -85,7 +85,6 @@
           yum:
             name: rsync
             state: present
-          when: ansible__distribution is "CentOS"
 
         - name: Yum - Install Git
           yum:

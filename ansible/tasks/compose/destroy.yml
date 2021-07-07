@@ -1,11 +1,9 @@
 - name: Build and deploy nodes
   hosts: all
-  vars_files:
-  - "../../vars/nodes.yml"
+  become: yes
 
   tasks:
   - name: Tear down existing services
-    become: yes
     command:
       cmd: >
         docker-compose

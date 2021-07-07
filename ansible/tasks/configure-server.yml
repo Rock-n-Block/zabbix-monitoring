@@ -1,15 +1,12 @@
 - name: Setup server configurations
   hosts: zabbix_server
   become: yes
-  vars_files:
-    - "../vars/nodes.yml"
-
 
   tasks:
     - name: Set config
       template: 
         src: ../templates/.env.server.j2
-        dest: "{{ agent_workdir }}/.env"
+        dest: "{{ workdir }}/.env"
         owner: "{{ ansible_user }}"
         group: "{{ ansible_user }}"
         mode: 0644

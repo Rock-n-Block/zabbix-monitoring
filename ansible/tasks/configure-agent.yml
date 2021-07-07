@@ -1,15 +1,13 @@
 - name: Setup agent configurations
   hosts: agents
   become: yes
-  vars_files:
-    - "../vars/nodes.yml"
 
 
   tasks:
     - name: Set config
       template: 
         src: ../templates/.env.agents.j2
-        dest: "{{ agent_workdir }}/.env"
+        dest: "{{ workdir }}/.env"
         owner: "{{ ansible_user }}"
         group: "{{ ansible_user }}"
         mode: 0644

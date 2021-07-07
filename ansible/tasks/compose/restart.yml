@@ -1,11 +1,9 @@
 - name: Restart nodes
   hosts: all
-  vars_files:
-  - "../../vars/nodes.yml"
+  become: yes
 
   tasks:
   - name: Stop services
-    become: yes
     command:
       cmd: >
         docker-compose
@@ -13,7 +11,6 @@
         stop
 
   - name: Start services
-    become: yes
     command:
       cmd: >
         docker-compose
