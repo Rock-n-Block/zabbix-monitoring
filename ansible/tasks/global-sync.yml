@@ -1,5 +1,5 @@
 - name: Setup common backend configurations
-  hosts: agents
+  hosts: all
   become: yes
   vars_files:
     - "../vars/nodes.yml"
@@ -16,12 +16,6 @@
         repo: https://github.com/Rock-n-Block/zabbix-monitoring.git
         dest: "{{ agent_workdir }}"
 
-    - name: Set config
-      template: 
-        src: ../templates/ducatuscoin.conf.j2
-        dest: "{{ agent_workdir }}/ducatuscoin.conf"
-        owner: "{{ ansible_user }}"
-        group: "{{ ansible_user }}"
-        mode: 0644
+
         
     
