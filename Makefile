@@ -1,4 +1,5 @@
 
+hosts_path := ansible/hosts.yml
 compose_server := docker-compose -f docker-compose.yml
 compose_agent := docker-compose -f docker-compose.yml
 verbosity := 
@@ -26,16 +27,16 @@ setup_agent:
 	$(ansible_cfg) ansible-playbook -i=$(hosts_path) -l $(service) ansible/tasks/configure-agents.yml $(verbosity)
 
 start_server:
-  $(compose_server) up -d
+	$(compose_server) up -d
 
 start_agent:
-  $(compose_agent) up -d
+	$(compose_agent) up -d
 
 stop_server:
-  $(compose_server) down
+	$(compose_server) down
 
 stop_agent:
-  $(compose_agent) down
+	$(compose_agent) down
 
 
 build_server: setup_server start_server

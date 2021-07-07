@@ -164,25 +164,25 @@
 
       when: ansible_facts['distribution'] == 'Ubuntu'
 
-    - name: FirewallD setup
-      block:
-        - name: Systemd - Enable firewalld service
-          systemd:
-            name: firewalld
-            state: started
-            enabled: yes
+    # - name: FirewallD setup
+    #   block:
+    #     - name: Systemd - Enable firewalld service
+    #       systemd:
+    #         name: firewalld
+    #         state: started
+    #         enabled: yes
 
-        - name: FirewallD - Enable SSH
-          shell: firewall-cmd --add-service=ssh
+    #     - name: FirewallD - Enable SSH
+    #       shell: firewall-cmd --add-service=ssh
 
-        - name: FirewallD - Enable 9690 port
-          shell: firewall-cmd --add-port=9690/tcp
+    #     - name: FirewallD - Enable 9690 port
+    #       shell: firewall-cmd --add-port=9690/tcp
         
-        - name: FirewallD - Enable 9691 port
-          shell: firewall-cmd --add-port=9691/tcp
+    #     - name: FirewallD - Enable 9691 port
+    #       shell: firewall-cmd --add-port=9691/tcp
 
-        - name: FirewallD - Make configuration permanent
-          shell: firewall-cmd --runtime-to-permanent
+    #     - name: FirewallD - Make configuration permanent
+    #       shell: firewall-cmd --runtime-to-permanent
 
     - name: Pip dependencies
       block:
