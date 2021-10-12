@@ -24,7 +24,7 @@ setup_server:
 	$(ansible_cfg) ansible-playbook -i=$(hosts_path) -l zabbix_server ansible/tasks/configure-server.yml $(verbosity)
 
 setup_agent:
-	$(ansible_cfg) ansible-playbook -i=$(hosts_path) ansible/tasks/configure-agent.yml $(verbosity)
+	$(ansible_cfg) ansible-playbook -i=$(hosts_path) -l $(service) ansible/tasks/configure-agent.yml $(verbosity)
 
 
 # ------ #
